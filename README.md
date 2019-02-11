@@ -1,6 +1,6 @@
 # ScannerApp
 
-Created for the very-specific purpose of communicating via android with a raspberry pi running a scanner. The code to run the scanner is provided in the "pottery8990" repository. This repository includes only the android-side code, and the server code (server.py) that is on the pi, and does not include any other code from the scanner, such as the code controlling the cameras or motors. 
+Created for the very-specific purpose of communicating via android with a raspberry pi running a scanner. The code to run the scanner is provided in the "pottery8990" repository. "theApp" repository includes only the android-side code, and the server code (server.py) that is on the pi, and does not include any other code from the scanner, such as the code controlling the cameras or motors. 
 
 ## Importing to Android Studio
 
@@ -8,7 +8,7 @@ Create new project with the name "ScannerApp" and min sdk 15. Call the main acti
 
 ## Installing and Running apk on the Android
 
-The app isn't on the google play store. To debug the app, put the android phone/tablet in developer mode, and run from android studio. This will open the app. 
+The app isn't on the google play store at the moment. To debug the app, put the android phone/tablet in developer mode, and run from android studio. This will open the app. 
 
 Alternatively, I'll add the actual .apk to this repo soon. If the .apk is downloaded from here, and not run via android studio, the following must be done:
 * allow 3rd party apps to run on the device (an option in "Security" tab of "Settings")
@@ -33,7 +33,7 @@ No non-default libraries are used for this portion of the pi code, so no imports
 
 ## Troubleshooting
 
-The raspberry pi and android phone must be connected to the internet via the same router. This means they must be connected to the same wifi network, and, if it is a large network with multiple routers, they must be on the same router.
+The raspberry pi and android phone must be connected to the internet via the same router. This means they must be connected to the same wifi network, and, if it is a large network with multiple routers, they must be on the same router. A phone hotspot can also be used as a router should no other small networks be available
 
 A good way to check if they are on the same router is to check that the first few sections of the IP address are the same (If the IP address is 127.0.0.1 or something similar, you are looking at your local IP address, which is not the correct IP address for this check. To find your non-local IP, it can be found in your computer's settings, or simply by googling "what is my IP address")
 
