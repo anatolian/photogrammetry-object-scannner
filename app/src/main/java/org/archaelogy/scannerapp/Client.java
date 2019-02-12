@@ -15,9 +15,9 @@ public class Client extends AsyncTask<Void, String, String> {
     int dstPort;
     String response = "";
     ScannerInfo activity;
-    public static Socket socket = null;
+    public Socket socket = null;
 
-    static PrintWriter out;
+    PrintWriter out;
 
     Client(String addr, int port, ScannerInfo activity) {
         dstAddress = addr;
@@ -85,7 +85,7 @@ public class Client extends AsyncTask<Void, String, String> {
         super.onPostExecute(result);
     }
 
-    public static void sendMessage(String message){
+    public void sendMessage(String message){
         out.print(message);
         out.flush();
     }

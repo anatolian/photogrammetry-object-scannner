@@ -11,10 +11,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Base Directory"
+            android:inputType="text"
+            android:id="@+id/directoryEditText"/>
+
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/HemisphereRadio">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -24,37 +32,44 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="N"/>
+                android:text="N"
+                android:id="@+id/HemisphereRadioN"/>
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="S"/>
+                android:text="S"
+                android:id="@+id/HemisphereRadioS"/>
 
         </RadioGroup>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint=""
-            android:inputType="number"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Northing"
-            android:inputType="number"/>
+            android:hint="Longitude Zone"
+            android:inputType="number"
+            android:id="@+id/LongitudeEditText"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Easting"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:id="@+id/EastingEditText"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Number"/>
+            android:hint="Northing"
+            android:inputType="number"
+            android:id="@+id/NorthingEditText"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Identifier"
+            android:inputType="number"
+            android:id="@+id/IdentifierEditText"/>
 
         <RadioGroup
             android:layout_width="match_parent"

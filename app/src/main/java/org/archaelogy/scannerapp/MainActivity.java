@@ -10,15 +10,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends Activity {
 
     TextView response;
-    EditText editTextAddress, editTextPort, editTextMessage;
-    Button buttonConnect, buttonClear, buttonSend;
+    EditText editTextAddress, editTextPort;
+    Button buttonConnect;
 
     int resultCode;
     int request_Code = 0;
@@ -31,9 +28,6 @@ public class MainActivity extends Activity {
         editTextAddress = (EditText) findViewById(R.id.addressEditText);
         editTextPort = (EditText) findViewById(R.id.portEditText);
         buttonConnect = (Button) findViewById(R.id.connectButton);
-
-        editTextMessage = (EditText) findViewById(R.id.messageEditText);
-        buttonSend = (Button) findViewById(R.id.sendButton);
 
         response = (TextView) findViewById(R.id.responseTextView);
 
@@ -51,14 +45,6 @@ public class MainActivity extends Activity {
                 myIntent.putExtra("addr", editTextAddress.getText().toString()); //Optional parameters
                 myIntent.putExtra("port", Integer.parseInt(editTextPort.getText().toString()));
                 MainActivity.this.startActivityForResult(myIntent, request_Code);
-            }
-        });
-
-        buttonClear.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                response.setText("");
             }
         });
     }
