@@ -10,11 +10,14 @@ Create new project with the name "ScannerApp" and min sdk 15. Call the main acti
 
 The app isn't on the google play store at the moment. To debug the app, put the android phone/tablet in developer mode, and run from android studio. This will open the app. 
 
-Alternatively, I'll add the actual .apk to this repo soon. If the .apk is downloaded from here, and not run via android studio, the following must be done:
+Alternatively, to download the app without android studio, you can do the following:
+* download the app-debug.apk from the repo to your computer
 * allow 3rd party apps to run on the device (an option in "Security" tab of "Settings")
 * get a file manager for the phone, so that the .apk can be accessed
-* when connecting the android phone to the computer with the .apk, trust the computer with access to the android's files
-this will put the download on the phone, which can be accessed and installed via the file manager
+* when connecting the android phone to the computer with the .apk, go to android notifications (swipe down from top of screen)
+* select the notification that says "USB Charging Only", then choose to use USB to "Transfer Files"
+* you will now be able to see the contents of the android phone on the computer. Drag and drop the apk from the computer to the android (I typically move it to the "Downloads" folder
+* search for "app-debug.apk" in the file explorer, and choose to install it. If you get a warning about trusting the app, choose to trust it
 
 ## Installing and Running server.py on Pi (or other computer)
 
@@ -38,4 +41,25 @@ The raspberry pi and android phone must be connected to the internet via the sam
 A good way to check if they are on the same router is to check that the first few sections of the IP address are the same (If the IP address is 127.0.0.1 or something similar, you are looking at your local IP address, which is not the correct IP address for this check. To find your non-local IP, it can be found in your computer's settings, or simply by googling "what is my IP address")
 
 
+## Features Implemented
+* connect to device running server.py via android phone running ScannerApp.apk
+* enter various information about the sherd, and use that information to determine what directory location to send to the scanner as string that can be used by command line/etc.
+* pi server prints all messages it receives, for debug purposes
+* android client shows all messages it receives as toast, for debug purposes
+* NOTE: currently, server only echos back the message it received from the client
 
+## TO DO:
+
+### Client-Side
+* allow user to input size of the sherd, and send this information to the server along with the directory
+* disable "start scan" button until a scan is finished
+* more thorough validation of inputs
+* save most recent inputs from edittexts/etc, and prepopulate these fields with these values upon opening app, so that user does not have to re-enter information that will not change often
+* allow user to send message to cancel scan
+* estimated progress bar for current scan?
+* notification/toast + re-enabling "start scan" button upon message from server that scan is complete
+
+### Server-Side
+* send "scan started" and "scan finished" messages to app, rather than echo
+* parse the slightly more complicated messages that the client-side TODO items would require
+* integrate with the rest of the pi's scanner code
