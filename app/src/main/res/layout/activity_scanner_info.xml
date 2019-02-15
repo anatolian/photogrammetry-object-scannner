@@ -101,7 +101,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Begin Scan"
+            android:text="Waiting for Connection..."
+            android:enabled="false"
             android:id="@+id/buttonScanStart"/>
 
     </LinearLayout>

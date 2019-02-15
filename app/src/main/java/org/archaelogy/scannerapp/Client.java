@@ -1,6 +1,8 @@
 package org.archaelogy.scannerapp;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +45,7 @@ public class Client extends AsyncTask<Void, String, String> {
              * notice: inputStream.read() will block if no data return
 			 */
             while (inputStream.read(buffer) != -1) {
-                response = new String(buffer, "utf8" );
+                response = new String(buffer, "utf8" ).trim(); //trim removes excess empty chars
                 publishProgress(response);
                 //Log.d("loop", response);
                 buffer = new byte[1024];

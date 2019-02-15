@@ -23,12 +23,6 @@
         android:layout_marginTop="20dp"
         android:text="Connect..." />
 
-    <Button
-        android:id="@+id/clearButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Clear" />
-
     <TextView
         android:id="@+id/responseTextView"
         android:layout_width="wrap_content"

@@ -30,7 +30,7 @@ No non-default libraries are used for this portion of the pi code, so no imports
 
 * run server.py
 * enter server address and port into the specified textboxes on the android app, and hit "connect" button
-  * pi address can be found with command "wlan0", listed as "inet" address
+  * pi address can be found by googling "my ip address" and probably in the computer properties somewhere.
   * port number is 5005
 * if connect is successful, input information about sherd for the scan, and press "start scan"
 
@@ -40,26 +40,35 @@ The raspberry pi and android phone must be connected to the internet via the sam
 
 A good way to check if they are on the same router is to check that the first few sections of the IP address are the same (If the IP address is 127.0.0.1 or something similar, you are looking at your local IP address, which is not the correct IP address for this check. To find your non-local IP, it can be found in your computer's settings, or simply by googling "what is my IP address")
 
+Also, for unknown reasons, the app was not able to connect to the server for about two days, despite the fact that none of the code had changed since the last time it worked. After that though, the code started working again, despite nothing being changed during the debugging process over those past two days. The reason for this bug is unknown and has caused quite a bit of frustration for the developer, but hopefully the cause and/or solution will be discovered soon. It has nothing to do with the code though, since that didn't change.
+
 
 ## Features Implemented
+
+### Client-Side
 * connect to device running server.py via android phone running ScannerApp.apk
 * enter various information about the sherd, and use that information to determine what directory location to send to the scanner as string that can be used by command line/etc.
-* pi server prints all messages it receives, for debug purposes
-* android client shows all messages it receives as toast, for debug purposes
-* NOTE: currently, server only echos back the message it received from the client
+* shows all messages it receives as toast, for debug purposes
+* "start scan" button becomes "cancel scan" button when scan is in progress, and reverts back to a "start scan" button upon scan completion
+* "start scan" button is disabled until the app connects to the server or an error is thrown.
+* user may begin inputting information for next sherd while current scan is taking place
+
+### Server-Side
+* prints all messages it receives, for debug purposes
+* upon "start scan" command, server starts a new thread to run the scanner code in.
+* sends message to app upon completion of scan
+* listens for a "cancel" command from the phone, quickly ending scan if requested. 
+* NOTE: For now, the "scanner" thread merely runs a counter, but hopefully the scanner code is easy to integrate
 
 ## TO DO:
 
 ### Client-Side
 * allow user to input size of the sherd, and send this information to the server along with the directory
-* disable "start scan" button until a scan is finished
 * more thorough validation of inputs
 * save most recent inputs from edittexts/etc, and prepopulate these fields with these values upon opening app, so that user does not have to re-enter information that will not change often
-* allow user to send message to cancel scan
 * estimated progress bar for current scan?
-* notification/toast + re-enabling "start scan" button upon message from server that scan is complete
 
 ### Server-Side
-* send "scan started" and "scan finished" messages to app, rather than echo
 * parse the slightly more complicated messages that the client-side TODO items would require
 * integrate with the rest of the pi's scanner code
+* give pi a constant address (or at least some way to determine its address without a monitor/keyboard/etc)
