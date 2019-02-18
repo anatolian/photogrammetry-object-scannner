@@ -31,6 +31,12 @@ public class MainActivity extends Activity {
 
         response = (TextView) findViewById(R.id.responseTextView);
 
+        SharedPreferences settings = getSharedPreferences("ScannerAppSettings", 0);
+        String addr = settings.getString("addr", "");
+        String port = settings.getString("port", "");
+        editTextAddress.setText(addr);
+        editTextPort.setText(port);
+
         buttonConnect.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -40,6 +46,7 @@ public class MainActivity extends Activity {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("addr", editTextAddress.getText().toString());
                 editor.putString("port", editTextPort.getText().toString());
+                editor.commit();
 
                 Intent myIntent = new Intent(MainActivity.this, ScannerInfo.class);
                 myIntent.putExtra("addr", editTextAddress.getText().toString()); //Optional parameters

@@ -27,6 +27,15 @@ public class ScannerInfo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner_info);
 
+        final EditText textBaseDir = findViewById(R.id.directoryEditText);
+        final RadioGroup radioGroup = findViewById(R.id.HemisphereRadio);
+        final EditText textLong = findViewById(R.id.LongitudeEditText);
+        final EditText textEast = findViewById(R.id.EastingEditText);
+        final EditText textNorth = findViewById(R.id.NorthingEditText);
+        final EditText textId = findViewById(R.id.IdentifierEditText);
+        final RadioButton RadioButtonN = findViewById(R.id.HemisphereRadioN);
+        final RadioButton RadioButtonS = findViewById(R.id.HemisphereRadioS);
+
         Intent intent = getIntent();
 
         String addr = intent.getStringExtra("addr");
@@ -37,19 +46,28 @@ public class ScannerInfo extends Activity {
 
         buttonScanStart = (Button) findViewById(R.id.buttonScanStart);
 
-        final String[] hemisphere = {"N"};
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("ScannerAppSettings", 0);
+        String baseDir = settings.getString("baseDir", "");
+        String hemisphere = settings.getString("hemisphere", "N");
+        String longitude = settings.getString("longitude", "");
+        String easting = settings.getString("easting", "");
+        String northing = settings.getString("northing", "");
+        String identifier = settings.getString("identifier", "");
+
+        textBaseDir.setText(baseDir);
+        if(hemisphere.equals("N")){
+            RadioButtonN.setChecked(true);
+        } else RadioButtonS.setChecked(true);
+        textLong.setText(longitude);
+        textEast.setText(easting);
+        textNorth.setText(northing);
+        textId.setText(identifier);
 
         buttonScanStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(!scanning){
-                    EditText textBaseDir = findViewById(R.id.directoryEditText);
-                    RadioGroup radioGroup = findViewById(R.id.HemisphereRadio);
-                    EditText textLong = findViewById(R.id.LongitudeEditText);
-                    EditText textEast = findViewById(R.id.EastingEditText);
-                    EditText textNorth = findViewById(R.id.NorthingEditText);
-                    EditText textId = findViewById(R.id.IdentifierEditText);
 
                     String baseDir = textBaseDir.getText().toString();
                     String hemisphere = "";
@@ -73,10 +91,15 @@ public class ScannerInfo extends Activity {
                     myClient.sendMessage(message);
 
                     //save inputs just entered, to make entering info less repetitive
-                    //TODO:
                     SharedPreferences settings = getApplicationContext().getSharedPreferences("ScannerAppSettings", 0);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("hemisphere", "");
+                    editor.putString("baseDir", baseDir);
+                    editor.putString("hemisphere", hemisphere);
+                    editor.putString("longitude", longitude);
+                    editor.putString("easting", easting);
+                    editor.putString("northing", northing);
+                    editor.putString("identifier", identifier);
+                    editor.commit();
 
                     buttonScanStart.setText("Cancel Scan");
                 } else {

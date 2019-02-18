@@ -52,6 +52,7 @@ Also, for unknown reasons, the app was not able to connect to the server for abo
 * "start scan" button becomes "cancel scan" button when scan is in progress, and reverts back to a "start scan" button upon scan completion
 * "start scan" button is disabled until the app connects to the server or an error is thrown.
 * user may begin inputting information for next sherd while current scan is taking place
+* save most recent inputs from edittexts/etc, and prepopulate these fields with these values upon opening app, so that user does not have to re-enter information that will not change often
 
 ### Server-Side
 * prints all messages it receives, for debug purposes
@@ -65,7 +66,6 @@ Also, for unknown reasons, the app was not able to connect to the server for abo
 ### Client-Side
 * allow user to input size of the sherd, and send this information to the server along with the directory
 * more thorough validation of inputs
-* save most recent inputs from edittexts/etc, and prepopulate these fields with these values upon opening app, so that user does not have to re-enter information that will not change often
 * estimated progress bar for current scan?
 
 ### Server-Side
