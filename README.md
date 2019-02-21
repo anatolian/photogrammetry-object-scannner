@@ -59,7 +59,7 @@ Also, for unknown reasons, the app was not able to connect to the server for abo
 * upon "start scan" command, server starts a new thread to run the scanner code in.
 * sends message to app upon completion of scan
 * listens for a "cancel" command from the phone, quickly ending scan if requested. 
-* NOTE: For now, the "scanner" thread merely runs a counter, but hopefully the scanner code is easy to integrate
+* integrate with the rest of the pi's scanner code
 
 ## TO DO:
 
@@ -70,5 +70,4 @@ Also, for unknown reasons, the app was not able to connect to the server for abo
 
 ### Server-Side
 * parse the slightly more complicated messages that the client-side TODO items would require
-* integrate with the rest of the pi's scanner code
 * give pi a constant address (or at least some way to determine its address without a monitor/keyboard/etc)
