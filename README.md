@@ -8,9 +8,20 @@ Create new project with the name "ScannerApp" and min sdk 15. Call the main acti
 
 ## Installing and Running apk on the Android
 
-The app isn't on the google play store at the moment. To debug the app, put the android phone/tablet in developer mode, and run from android studio. This will open the app. 
+### With Android Studio (aka read this section if you are developing)
 
-Alternatively, to download the app without android studio, you can do the following:
+* Build the app in android studio, using the instructions above. 
+* Ensure your device is in developer mode. 
+* Connect your device via usb. 
+* Press "run" in android studio. 
+* Select your device from the list of devices. If your device is not there, check the device to ensure you've entrusted this computer on the device.
+
+### Without Android Studio, on a Phone Which Has Already Run the Most Recent Version of the App (aka read this section if you are Joe, Julia, Zoe, or Fan)
+
+Search for "ScannerApp" in the google search bar. Most recent version of the app will show up there.
+
+### Without Android Studio on a New Device
+
 * download the app-debug.apk from the repo to your computer
 * allow 3rd party apps to run on the device (an option in "Security" tab of "Settings")
 * get a file manager for the phone, so that the .apk can be accessed
@@ -24,7 +35,7 @@ Alternatively, to download the app without android studio, you can do the follow
 You must have python installed on the pi.
 From the command, run "python.exe <path_to_server.py>"
 
-No non-default libraries are used for this portion of the pi code, so no imports are necessary before use.
+No non-default libraries are used for server portion of the pi code, so no imports are necessary before use. For imports necessary to run motor and camera, consult the documentation for those portions of the code.
 
 ## How to Connect
 
@@ -40,7 +51,19 @@ The raspberry pi and android phone must be connected to the internet via the sam
 
 A good way to check if they are on the same router is to check that the first few sections of the IP address are the same (If the IP address is 127.0.0.1 or something similar, you are looking at your local IP address, which is not the correct IP address for this check. To find your non-local IP, it can be found in your computer's settings, or simply by googling "what is my IP address")
 
-Also, for unknown reasons, the app was not able to connect to the server for about two days, despite the fact that none of the code had changed since the last time it worked. After that though, the code started working again, despite nothing being changed during the debugging process over those past two days. The reason for this bug is unknown and has caused quite a bit of frustration for the developer, but hopefully the cause and/or solution will be discovered soon. It has nothing to do with the code though, since that didn't change.
+
+Client-side:
+
+EHOSTUNREACH - this is a network issue. The solution to this problem is still not quite understood, but in the past, restarting either the pi or the phone until a connection can be made has worked.
+
+TIMEOUT - either the server isn't running, or the IP address was inputted incorrectly
+
+ECONNRESET - server on the pi was closed while the phone was still connected
+
+
+Server-side:
+
+socket error - address already in use - we have observed this error message when restarting the server immediately after it was closed. Waiting a few minutes before attempting to restart the server again fixes the issue
 
 
 ## Features Implemented
@@ -53,6 +76,7 @@ Also, for unknown reasons, the app was not able to connect to the server for abo
 * "start scan" button is disabled until the app connects to the server or an error is thrown.
 * user may begin inputting information for next sherd while current scan is taking place
 * save most recent inputs from edittexts/etc, and prepopulate these fields with these values upon opening app, so that user does not have to re-enter information that will not change often
+* progress bar for current scan
 
 ### Server-Side
 * prints all messages it receives, for debug purposes
@@ -66,7 +90,6 @@ Also, for unknown reasons, the app was not able to connect to the server for abo
 ### Client-Side
 * allow user to input size of the sherd, and send this information to the server along with the directory
 * more thorough validation of inputs
-* estimated progress bar for current scan?
 
 ### Server-Side
 * parse the slightly more complicated messages that the client-side TODO items would require

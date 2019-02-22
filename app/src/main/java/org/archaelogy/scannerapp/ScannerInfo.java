@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
@@ -21,6 +22,9 @@ public class ScannerInfo extends Activity {
 
     boolean scanning = false;
     Button buttonScanStart;
+
+    ProgressBar progressBar;
+    TextView progressBarText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,9 @@ public class ScannerInfo extends Activity {
         final EditText textId = findViewById(R.id.IdentifierEditText);
         final RadioButton RadioButtonN = findViewById(R.id.HemisphereRadioN);
         final RadioButton RadioButtonS = findViewById(R.id.HemisphereRadioS);
+
+        progressBar = findViewById(R.id.determinateBar);
+        progressBarText = findViewById(R.id.progressBarText);
 
         Intent intent = getIntent();
 
@@ -117,12 +124,29 @@ public class ScannerInfo extends Activity {
         if(message.equals("Connected!")){
             buttonScanStart.setText("Begin Scan");
             buttonScanStart.setEnabled(true);
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
         }
         else if(message.equals("done")){
             buttonScanStart.setText("Begin Scan");
             scanning = false;
+            progressBar.setVisibility(View.GONE);
+            progressBarText.setText("");
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        //progress update
+        else{
+            try{
+                String percentage = message.substring(0,3);
+                String descriptionText = message.substring(3);
+                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setProgress(Integer.parseInt(percentage));
+                String progressText = Integer.toString(Integer.parseInt(percentage)) + descriptionText;
+                progressBarText.setText(progressText);
+            } catch(Exception e) {
+                // just skip progress update if somehow something's wrong
+                progressBarText.setText(message);
+            }
+        }
     }
 
     public void onFailedConnect(String response){

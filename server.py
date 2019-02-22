@@ -220,6 +220,24 @@ def one_sherd_photo_cycle(directory):
         # If we have taken enough steps since the previous capture, then stop and take a picture.
         #resetCaptureTarget() # not sure if adding this here helps anything
         if (i >= next_angle_steps):
+            
+                    
+            percentDone = (i*100)//FULL_CYCLE_STEPS
+            percentDoneStr = None;
+        
+            if percentDone == 0:
+                percentDoneStr = "000"
+            elif percentDone < 10:
+                percentDoneStr = "00" + str(percentDone)
+            elif percentDone == 100:
+                percentDoneStr = str(percentDone)
+            else:
+                percentDoneStr = "0" + str(percentDone)
+            finalStr = percentDoneStr + "% Done"
+            print(finalStr)
+            conn.send(finalStr.encode())
+            
+            
             # Wait a little while for vibration stabilization
             sleep(SLEEP_TIME_BETWEEN_SHOTS)
             
@@ -243,6 +261,7 @@ def one_sherd_photo_cycle(directory):
 
     # After a full cycle, start downloading files
     print("Downloading...")
+    conn.send("Downloading Files From Camera...")
     download_and_rename_files(save_location_subfolder_name_base)
 
 
@@ -308,6 +327,6 @@ while 1:
 		stopScan();
 	else:
 		scan = threading.Thread(target=doScan, args=(input,)).start();
-	conn.send(data)  # echo
+	# conn.send(data)  # echo
 conn.close()
 GPIO.cleanup()
