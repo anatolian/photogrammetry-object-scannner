@@ -1,6 +1,6 @@
 # ScannerApp
 
-Created for the very-specific purpose of communicating via android with a raspberry pi running a scanner. The code to run the scanner is provided in the "pottery8990" repository. "theApp" repository includes only the android-side code, and the server code (server.py) that is on the pi, and does not include any other code from the scanner, such as the code controlling the cameras or motors. 
+Created for the very-specific purpose of communicating via android with a raspberry pi running a scanner. The code to run the scanner is provided in the "pottery8990" repository. "theApp" repository includes only the android-side code, and the server code (server_cam_long_test.py) for the pi. To test the server without running the cameras or motor, use server.py
 
 ## Importing to Android Studio
 
