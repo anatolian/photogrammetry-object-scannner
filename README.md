@@ -1,6 +1,12 @@
 # ScannerApp
 
-Created for the very-specific purpose of communicating via android with a raspberry pi running a scanner. The code to run the scanner is provided in the "pottery8990" repository. "theApp" repository includes only the android-side code, and the server code (server_cam_long_test.py) for the pi. To test the server without running the cameras or motor, use server.py
+Created for the very-specific purpose of communicating via android with a raspberry pi running a scanner. "theApp" repository includes the android-side code, and the server code (server_cam_long_test.py) for the pi, and the code to automatically run the agisoft software on a model (agisoft-automation.py). 
+
+To test the server without running the cameras or motor, use server.py instead of server_cam_long_test.py.
+
+Also note, due to time constraints, and the need to shift focus onto the app development, the team was unable to produce a background removal code which would work well in all cases. It works in many cases, but in particular, it fairs worse with pots which are similar in color to the white or black on the checkerboard. However, in these cases, the team was able to manually remove the background successfully. 
+
+So, if the user finds a model where the background removal produces undesirable results, please run agisoft-pre-bg-removal.py, manually remove the background as desired, then run agisoft-post-bg-removal.py.
 
 ## Importing to Android Studio
 
@@ -44,6 +50,13 @@ No non-default libraries are used for server portion of the pi code, so no impor
   * pi address can be found by googling "my ip address" and probably in the computer properties somewhere.
   * port number is 5005
 * if connect is successful, input information about sherd for the scan, and press "start scan"
+
+## How to run the agisoft code
+
+* Open the pro version of Agisoft photoscan (otherwise, the files cannot be saved)
+* Import photos of sherd to be modeled
+* Select "Tools" -> "Run script", and then select the python script to run
+* Save project when the script is complete
 
 ## Troubleshooting
 
