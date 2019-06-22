@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,13 @@ public class ScannerInfo extends Activity {
 
     ProgressBar progressBar;
     TextView progressBarText;
+
+    public void enableStrictMode()
+    {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,7 @@ public class ScannerInfo extends Activity {
         String addr = intent.getStringExtra("addr");
         int port = intent.getIntExtra("port", 0);
 
+        enableStrictMode();
         final Client myClient = new Client(addr, port, this);
         myClient.execute();
 

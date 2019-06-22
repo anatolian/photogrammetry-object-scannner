@@ -8,6 +8,20 @@ Also note, due to time constraints, and the need to shift focus onto the app dev
 
 So, if the user finds a model where the background removal produces undesirable results, please run agisoft-pre-bg-removal.py, manually remove the background as desired, then run agisoft-post-bg-removal.py.
 
+## Updates 6/21/2019
+
+Bug fixes that will hopefully correct the NetworkOnMainThreadException
+
+There are now three versions of the .apk:
+
+* app-debug-old.apk : this is a backup of the .apk file from the previous update. This version threw the NetworkOnMainThreadException.
+* app-debug-rebuilt.apk : all of the code is the same as the previous update, but the apk was rebuilt. This version of the apk has been included because it is possible that during development, the code was pushed but the updated .apk file was not.
+* app-debug-new.apk : this .apk implements new code, using the suggestions from http://simpledeveloper.com/network-on-main-thread-error-solution/ 
+
+Jess recommends first downloading the app-debug-rebuilt.apk (see "Installing and Running apk on the Android" for instructions), and seeing if this version fixes the NetworkOnMainThreadException error. If it does not, then try the app-debug-new.apk
+
+Since Jess doesn't have an android device or pi while she is off-campus, she could not test any of these builds on her own device before pushing. So if problems persist, please send logs to her.
+
 ## Importing to Android Studio
 
 Create new project with the name "ScannerApp" and min sdk 15. Call the main activity "MainActivity". Then copy files from this repo into the created project.

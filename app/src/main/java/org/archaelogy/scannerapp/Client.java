@@ -1,7 +1,6 @@
 package org.archaelogy.scannerapp;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
